@@ -1,3 +1,4 @@
+from typing import Optional
 import torch
 import torch.nn as nn
 from src.models.ltae import LTAE
@@ -349,7 +350,7 @@ class Temporal_Aggregator(nn.Module):
         super(Temporal_Aggregator, self).__init__()
         self.mode = mode
 
-    def forward(self, x, pad_mask=None, attn_mask=None):
+    def forward(self, x:torch.Tensor, pad_mask:Optional[torch.Tensor]=None, attn_mask : Optional[torch.Tensor]=None):
         if pad_mask is not None and pad_mask.any():
             if self.mode == "att_group":
                 n_heads, b, t, h, w = attn_mask.shape
